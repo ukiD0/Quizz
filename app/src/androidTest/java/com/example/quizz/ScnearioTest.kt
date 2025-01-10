@@ -2,13 +2,11 @@ package com.example.quizz
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-
-import org.junit.Test
-import org.junit.runner.RunWith
-
-import org.junit.Assert.*
+import com.example.quizz.game.GamePage
 import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
@@ -36,8 +34,8 @@ class ScnearioTest {
     fun caseNumber1() {
         gamePage.assertAskedQuestionState()
 
-        gamePage.clickFirstChoise()
-        gamePage.assertFirstChoiseMakeState()
+        gamePage.clickFirstChoice()
+        gamePage.assertFirstChoiceMakeState()
 
         gamePage.clickCheck()
         gamePage.assertAnswerCheckStateFirstIsCorrect()
@@ -49,16 +47,16 @@ class ScnearioTest {
     fun caseNumber2(){
         gamePage.assertAskedQuestionState()
 
-        gamePage.clickFirstChoise()
-        gamePage.assertFirstChoiseMakeState()
+        gamePage.clickFirstChoice()
+        gamePage.assertFirstChoiceMakeState()
 
-        gamePage.clickSecondChoise()
-        gamePage.assertSecondChoiseMakeState()
+        gamePage.clickSecondChoice()
+        gamePage.assertSecondChoiceMakeState()
 
         gamePage.clickCheck()
         gamePage.assertAnswerCheckStateFirstIsCorrectSecondIsCorrect()
 
-        gamePage.clicNext()
+        gamePage.clickNext()
 
         gamePage = GamePage(
             question = "What color is the grass?", choices = listOf(
