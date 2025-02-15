@@ -10,7 +10,7 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-class ScnearioTest {
+class ScenarioTest {
 
     @get:Rule
     val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
