@@ -7,12 +7,12 @@ class GameViewModel(private val repository: GameRepository) {
         val data = repository.questionAndChoices()
         return GameUiState.ChoiceMade(
             data.question,
-            listOf(
-                ChoiceUiState.NotAvailableToChoose(data.choices[0]),
-                ChoiceUiState.AvailableToChoose(data.choices[1]),
-                ChoiceUiState.AvailableToChoose(data.choices[2]),
-                ChoiceUiState.AvailableToChoose(data.choices[3])
-            )
+            data.choices.mapIndexed { index, text ->
+                if (index == 0)
+                    ChoiceUiState.NotAvailableToChoose(text)
+                else
+                    ChoiceUiState.AvailableToChoose(text)
+            }
         )
     }
 
@@ -21,12 +21,12 @@ class GameViewModel(private val repository: GameRepository) {
         val data = repository.questionAndChoices()
         return GameUiState.ChoiceMade(
             data.question,
-            listOf(
-                ChoiceUiState.AvailableToChoose(data.choices[0]),
-                ChoiceUiState.NotAvailableToChoose(data.choices[1]),
-                ChoiceUiState.AvailableToChoose(data.choices[2]),
-                ChoiceUiState.AvailableToChoose(data.choices[3])
-            )
+            data.choices.mapIndexed { index, text ->
+                if (index == 1)
+                    ChoiceUiState.NotAvailableToChoose(text)
+                else
+                    ChoiceUiState.AvailableToChoose(text)
+            }
         )
     }
 
@@ -35,12 +35,12 @@ class GameViewModel(private val repository: GameRepository) {
         val data = repository.questionAndChoices()
         return GameUiState.ChoiceMade(
             data.question,
-            listOf(
-                ChoiceUiState.AvailableToChoose(data.choices[0]),
-                ChoiceUiState.AvailableToChoose(data.choices[1]),
-                ChoiceUiState.NotAvailableToChoose(data.choices[2]),
-                ChoiceUiState.AvailableToChoose(data.choices[3])
-            )
+            data.choices.mapIndexed { index, text ->
+                if (index == 2)
+                    ChoiceUiState.NotAvailableToChoose(text)
+                else
+                    ChoiceUiState.AvailableToChoose(text)
+            }
         )
     }
 
@@ -49,12 +49,12 @@ class GameViewModel(private val repository: GameRepository) {
         val data = repository.questionAndChoices()
         return GameUiState.ChoiceMade(
             data.question,
-            listOf(
-                ChoiceUiState.AvailableToChoose(data.choices[0]),
-                ChoiceUiState.AvailableToChoose(data.choices[1]),
-                ChoiceUiState.AvailableToChoose(data.choices[2]),
-                ChoiceUiState.NotAvailableToChoose(data.choices[3])
-            )
+            data.choices.mapIndexed { index, text ->
+                if (index == 3)
+                    ChoiceUiState.NotAvailableToChoose(text)
+                else
+                    ChoiceUiState.AvailableToChoose(text)
+            }
         )
     }
 
@@ -87,5 +87,4 @@ class GameViewModel(private val repository: GameRepository) {
             data.choices
         )
     }
-
 }
