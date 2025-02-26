@@ -1,6 +1,6 @@
 package com.example.quizz
 
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
@@ -10,26 +10,26 @@ class GameViewModelTest {
 
     @Before
     fun setup() {
-        viewModel = GameViewModel(repository = FakeRepository)
+        viewModel = GameViewModel(repository = FakeRepository())
     }
 
     @Test
     fun caseNumber1() {
         var actual: GameUiState = viewModel.init()
-        var excepted: GameUiState = AskedQuestion(
+        var excepted: GameUiState = GameUiState.AskedQuestion(
             question = "q1",
             choices = listOf("c1", "c2", "c3", "c4")
         )
         assertEquals(excepted, actual)
 
         actual = viewModel.chooseFirst()
-        excepted = GameUiState.choiceMade(
+        excepted = GameUiState.ChoiceMade(
             question = "q1",
             choices = listOf<ChoiceUiState>(
-                ChoiceUiState.NotAvalivleToChoose(text = "c1"),
-                ChoiceUiState.AvalivleToChoose(text = "c2"),
-                ChoiceUiState.AvalivleToChoose(text = "c3"),
-                ChoiceUiState.AvalivleToChoose(text = "c4")
+                ChoiceUiState.NotAvailableToChoose(text = "c1"),
+                ChoiceUiState.AvailableToChoose(text = "c2"),
+                ChoiceUiState.AvailableToChoose(text = "c3"),
+                ChoiceUiState.AvailableToChoose(text = "c4")
             )
         )
         assertEquals(excepted, actual)
@@ -39,9 +39,9 @@ class GameViewModelTest {
             question = "q1",
             choices = listOf<ChoiceUiState>(
                 ChoiceUiState.Correct(text = "c1"),
-                ChoiceUiState.NotAvalivleToChoose(text = "c2"),
-                ChoiceUiState.NotAvalivleToChoose(text = "c3"),
-                ChoiceUiState.NotAvalivleToChoose(text = "c4")
+                ChoiceUiState.NotAvailableToChoose(text = "c2"),
+                ChoiceUiState.NotAvailableToChoose(text = "c3"),
+                ChoiceUiState.NotAvailableToChoose(text = "c4")
             )
         )
         assertEquals(excepted, actual)
@@ -50,56 +50,56 @@ class GameViewModelTest {
     @Test
     fun caseNumber2() {
         var actual: GameUiState = viewModel.init()
-        var excepted: GameUiState = AskedQuestion(
+        var excepted: GameUiState = GameUiState.AskedQuestion(
             question = "q1",
             choices = listOf("c1", "c2", "c3", "c4")
         )
         assertEquals(excepted, actual)
 
         actual = viewModel.chooseFirst()
-        excepted = GameUiState.choiceMade(
+        excepted = GameUiState.ChoiceMade(
             question = "q1",
             choices = listOf<ChoiceUiState>(
-                ChoiceUiState.NotAvalivleToChoose(text = "c1"),
-                ChoiceUiState.AvalivleToChoose(text = "c2"),
-                ChoiceUiState.AvalivleToChoose(text = "c3"),
-                ChoiceUiState.AvalivleToChoose(text = "c4")
+                ChoiceUiState.NotAvailableToChoose(text = "c1"),
+                ChoiceUiState.AvailableToChoose(text = "c2"),
+                ChoiceUiState.AvailableToChoose(text = "c3"),
+                ChoiceUiState.AvailableToChoose(text = "c4")
             )
         )
         assertEquals(excepted, actual)
 
         actual = viewModel.chooseSecond()
-        excepted = GameUiState.choiceMade(
+        excepted = GameUiState.ChoiceMade(
             question = "q1",
             choices = listOf<ChoiceUiState>(
-                ChoiceUiState.AvalivleToChoose(text = "c1"),
-                ChoiceUiState.NotAvalivleToChoose(text = "c2"),
-                ChoiceUiState.AvalivleToChoose(text = "c3"),
-                ChoiceUiState.AvalivleToChoose(text = "c4")
+                ChoiceUiState.AvailableToChoose(text = "c1"),
+                ChoiceUiState.NotAvailableToChoose(text = "c2"),
+                ChoiceUiState.AvailableToChoose(text = "c3"),
+                ChoiceUiState.AvailableToChoose(text = "c4")
             )
         )
         assertEquals(excepted, actual)
 
         actual = viewModel.chooseThird()
-        excepted = GameUiState.choiceMade(
+        excepted = GameUiState.ChoiceMade(
             question = "q1",
             choices = listOf<ChoiceUiState>(
-                ChoiceUiState.AvalivleToChoose(text = "c1"),
-                ChoiceUiState.AvalivleToChoose(text = "c2"),
-                ChoiceUiState.NotAvalivleToChoose(text = "c3"),
-                ChoiceUiState.AvalivleToChoose(text = "c4")
+                ChoiceUiState.AvailableToChoose(text = "c1"),
+                ChoiceUiState.AvailableToChoose(text = "c2"),
+                ChoiceUiState.NotAvailableToChoose(text = "c3"),
+                ChoiceUiState.AvailableToChoose(text = "c4")
             )
         )
         assertEquals(excepted, actual)
 
         actual = viewModel.chooseForth()
-        excepted = GameUiState.choiceMade(
+        excepted = GameUiState.ChoiceMade(
             question = "q1",
             choices = listOf<ChoiceUiState>(
-                ChoiceUiState.AvalivleToChoose(text = "c1"),
-                ChoiceUiState.AvalivleToChoose(text = "c2"),
-                ChoiceUiState.AvalivleToChoose(text = "c3"),
-                ChoiceUiState.NotAvalivleToChoose(text = "c4")
+                ChoiceUiState.AvailableToChoose(text = "c1"),
+                ChoiceUiState.AvailableToChoose(text = "c2"),
+                ChoiceUiState.AvailableToChoose(text = "c3"),
+                ChoiceUiState.NotAvailableToChoose(text = "c4")
             )
         )
         assertEquals(excepted, actual)
@@ -109,8 +109,8 @@ class GameViewModelTest {
             question = "q1",
             choices = listOf<ChoiceUiState>(
                 ChoiceUiState.Correct(text = "c1"),
-                ChoiceUiState.NotAvalivleToChoose(text = "c2"),
-                ChoiceUiState.NotAvalivleToChoose(text = "c3"),
+                ChoiceUiState.NotAvailableToChoose(text = "c2"),
+                ChoiceUiState.NotAvailableToChoose(text = "c3"),
                 ChoiceUiState.Incorrect(text = "c4")
             )
         )
@@ -154,7 +154,7 @@ private class FakeRepository : GameRepository {
 
     override fun check(): CorrectAndUserChoiceIndexes {
         return CorrectAndUserChoiceIndexes(
-            correct = questionAndChoices().correctIndex,
+            correctIndex = questionAndChoices().correctIndex,
             userChoiceIndex = userChoiceIndex
         )
     }
