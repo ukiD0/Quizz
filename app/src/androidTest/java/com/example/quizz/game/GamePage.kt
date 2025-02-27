@@ -57,7 +57,7 @@ class GamePage(
     fun assertAskedQuestionState() {
         questionUi.assertTextVisible()
         choicesUiList.forEach {
-            it.assertAvalibleToChooseState()
+            it.assertAvailableToChooseState()
         }
         checkUi.assertNotVisible()
         nextUi.assertNotVisible()
@@ -69,12 +69,12 @@ class GamePage(
 
     fun assertFirstChoiceMakeState() {
         questionUi.assertTextVisible()
-        choicesUiList.first().assertNotAvalibleToChooseState()
+        choicesUiList.first().assertNotAvailableToChooseState()
         for (i in 1 until choicesUiList.size) {
-            choicesUiList[i].assertNotAvalibleToChooseState()
+            choicesUiList[i].assertAvailableToChooseState()
         }
         checkUi.assertVisible()
-        checkUi.assertNotVisible()
+        nextUi.assertNotVisible()
     }
 
     fun clickCheck() {
@@ -85,10 +85,10 @@ class GamePage(
         questionUi.assertTextVisible()
         choicesUiList.first().assertCorrectState()
         for (i in 1 until choicesUiList.size) {
-            choicesUiList[i].assertNotAvalibleToChooseState()
+            choicesUiList[i].assertNotAvailableToChooseState()
         }
-        checkUi.assertVisible()
         checkUi.assertNotVisible()
+        nextUi.assertVisible()
     }
 
     fun clickSecondChoice() {
@@ -99,23 +99,23 @@ class GamePage(
         questionUi.assertTextVisible()
         choicesUiList.forEachIndexed { index, choiceUi ->
             if (index == 1) {
-                choiceUi.assertNotAvalibleToChooseState()
+                choiceUi.assertNotAvailableToChooseState()
             } else {
-                choiceUi.assertAvalibleToChooseState()
+                choiceUi.assertAvailableToChooseState()
             }
         }
         checkUi.assertVisible()
-        checkUi.assertNotVisible()
+        nextUi.assertNotVisible()
     }
 
     fun assertAnswerCheckStateFirstIsCorrectSecondIsCorrect() {
         questionUi.assertTextVisible()
         choicesUiList.first().assertCorrectState()
         choicesUiList[1].assertIncorrectState()
-        choicesUiList[2].assertNotAvalibleToChooseState()
-        choicesUiList[3].assertNotAvalibleToChooseState()
+        choicesUiList[2].assertNotAvailableToChooseState()
+        choicesUiList[3].assertNotAvailableToChooseState()
         checkUi.assertNotVisible()
-        checkUi.assertVisible()
+        nextUi.assertVisible()
     }
 
     fun clickNext() {

@@ -32,13 +32,13 @@ class ChoiceUi(
         )
     )
 ){
-    fun assertAvalibleToChooseState() {
+    fun assertAvailableToChooseState() {
         interaction.check(matches(ButtonColorMatcher("#F18080")))
             .check(matches(isEnabled()))
             .check(matches(isClickable()))
     }
 
-    fun assertNotAvalibleToChooseState() {
+    fun assertNotAvailableToChooseState() {
         interaction.check(matches(isNotEnabled()))
     }
 

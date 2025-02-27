@@ -24,7 +24,7 @@ class ButtonUi(
             containerClassTypeMatcher,
             withId(id),
             withText(textResId),
-            ButtonColorMatcher(colorHex)
+            //ButtonColorMatcher(colorHex)
         )
     )
 ){
