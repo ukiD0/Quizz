@@ -160,8 +160,8 @@ private class FakeRepository : GameRepository {
     }
 
     override fun next() {
-        index++
         userChoiceIndex = -1
+        index++
         if (index == list.size)
             index = 0
     }

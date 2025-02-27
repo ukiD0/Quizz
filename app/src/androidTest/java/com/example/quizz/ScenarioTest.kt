@@ -39,6 +39,7 @@ class ScenarioTest {
 
         gamePage.clickCheck()
         gamePage.assertAnswerCheckStateFirstIsCorrect()
+
     }
     /**
      * Test case number 2
