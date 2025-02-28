@@ -33,11 +33,17 @@ class ScenarioTest {
     @Test
     fun caseNumber1() {
         gamePage.assertAskedQuestionState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertAskedQuestionState()
 
         gamePage.clickFirstChoice()
         gamePage.assertFirstChoiceMakeState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertFirstChoiceMakeState()
 
         gamePage.clickCheck()
+        gamePage.assertAnswerCheckStateFirstIsCorrect()
+        activityScenarioRule.scenario.recreate()
         gamePage.assertAnswerCheckStateFirstIsCorrect()
 
     }
@@ -47,14 +53,23 @@ class ScenarioTest {
     @Test
     fun caseNumber2(){
         gamePage.assertAskedQuestionState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertAskedQuestionState()
+
 
         gamePage.clickFirstChoice()
+        gamePage.assertFirstChoiceMakeState()
+        activityScenarioRule.scenario.recreate()
         gamePage.assertFirstChoiceMakeState()
 
         gamePage.clickSecondChoice()
         gamePage.assertSecondChoiceMakeState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertSecondChoiceMakeState()
 
         gamePage.clickCheck()
+        gamePage.assertAnswerCheckStateFirstIsCorrectSecondIsCorrect()
+        activityScenarioRule.scenario.recreate()
         gamePage.assertAnswerCheckStateFirstIsCorrectSecondIsCorrect()
 
         gamePage.clickNext()
@@ -64,6 +79,8 @@ class ScenarioTest {
             "green","blue","red","yellow"
             )
         )
+        gamePage.assertAskedQuestionState()
+        activityScenarioRule.scenario.recreate()
         gamePage.assertAskedQuestionState()
     }
 }
