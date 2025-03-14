@@ -1,17 +1,18 @@
 package com.example.quizz
 
+import com.example.quizz.views.choice.ChoiceUiState
+
 class GameViewModel(private val repository: GameRepository) {
 
     fun chooseFirst(): GameUiState {
         repository.saveUserChoice(0)
         val data = repository.questionAndChoices()
         return GameUiState.ChoiceMade(
-            data.question,
-            data.choices.mapIndexed { index, text ->
+            data.choices.mapIndexed { index, _ ->
                 if (index == 0)
-                    ChoiceUiState.NotAvailableToChoose(text)
+                    ChoiceUiState.NotAvailableToChoose
                 else
-                    ChoiceUiState.AvailableToChoose(text)
+                    ChoiceUiState.AvailableToChoose
             }
         )
     }
@@ -20,12 +21,11 @@ class GameViewModel(private val repository: GameRepository) {
         repository.saveUserChoice(1)
         val data = repository.questionAndChoices()
         return GameUiState.ChoiceMade(
-            data.question,
-            data.choices.mapIndexed { index, text ->
+            data.choices.mapIndexed { index, _ ->
                 if (index == 1)
-                    ChoiceUiState.NotAvailableToChoose(text)
+                    ChoiceUiState.NotAvailableToChoose
                 else
-                    ChoiceUiState.AvailableToChoose(text)
+                    ChoiceUiState.AvailableToChoose
             }
         )
     }
@@ -34,12 +34,11 @@ class GameViewModel(private val repository: GameRepository) {
         repository.saveUserChoice(2)
         val data = repository.questionAndChoices()
         return GameUiState.ChoiceMade(
-            data.question,
-            data.choices.mapIndexed { index, text ->
+            data.choices.mapIndexed { index, _ ->
                 if (index == 2)
-                    ChoiceUiState.NotAvailableToChoose(text)
+                    ChoiceUiState.NotAvailableToChoose
                 else
-                    ChoiceUiState.AvailableToChoose(text)
+                    ChoiceUiState.AvailableToChoose
             }
         )
     }
@@ -48,12 +47,11 @@ class GameViewModel(private val repository: GameRepository) {
         repository.saveUserChoice(3)
         val data = repository.questionAndChoices()
         return GameUiState.ChoiceMade(
-            data.question,
-            data.choices.mapIndexed { index, text ->
+            data.choices.mapIndexed { index, _ ->
                 if (index == 3)
-                    ChoiceUiState.NotAvailableToChoose(text)
+                    ChoiceUiState.NotAvailableToChoose
                 else
-                    ChoiceUiState.AvailableToChoose(text)
+                    ChoiceUiState.AvailableToChoose
             }
         )
     }
@@ -62,14 +60,13 @@ class GameViewModel(private val repository: GameRepository) {
         val data = repository.questionAndChoices()
         val correctAndUserChoiceIndexes = repository.check()
         return GameUiState.AnswerChecked(
-            data.question,
-            data.choices.mapIndexed { index, choice ->
+            data.choices.mapIndexed { index, _ ->
                 if (correctAndUserChoiceIndexes.correctIndex == index)
-                    ChoiceUiState.Correct(text = choice)
+                    ChoiceUiState.Correct
                 else if (correctAndUserChoiceIndexes.userChoiceIndex == index) {
-                    ChoiceUiState.Incorrect(text = choice)
+                    ChoiceUiState.Incorrect
                 } else {
-                    ChoiceUiState.NotAvailableToChoose(choice)
+                    ChoiceUiState.NotAvailableToChoose
                 }
             }
         )
@@ -80,11 +77,14 @@ class GameViewModel(private val repository: GameRepository) {
         return init()
     }
 
-    fun init(): GameUiState {
-        val data = repository.questionAndChoices()
-        return GameUiState.AskedQuestion(
-            data.question,
-            data.choices
-        )
+    fun init(firstRun: Boolean = true): GameUiState {
+        if (firstRun) {
+            val data = repository.questionAndChoices()
+            return GameUiState.AskedQuestion(
+                data.question,
+                data.choices
+            )
+        } else
+            return GameUiState.Empty
     }
 }
