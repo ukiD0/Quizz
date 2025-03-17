@@ -15,7 +15,7 @@ interface IntCache {
     ) : IntCache {
 
         override fun save(newValue: Int) {
-            sharedPreferences.edit().putInt(key, defaultValue).apply()
+            sharedPreferences.edit().putInt(key, newValue).apply()
         }
 
         override fun read(): Int {
