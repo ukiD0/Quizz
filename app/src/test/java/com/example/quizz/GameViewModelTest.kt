@@ -1,5 +1,6 @@
 package com.example.quizz
 
+import com.example.quizz.views.choice.ChoiceUiState
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -24,24 +25,22 @@ class GameViewModelTest {
 
         actual = viewModel.chooseFirst()
         excepted = GameUiState.ChoiceMade(
-            question = "q1",
             choices = listOf<ChoiceUiState>(
-                ChoiceUiState.NotAvailableToChoose(text = "c1"),
-                ChoiceUiState.AvailableToChoose(text = "c2"),
-                ChoiceUiState.AvailableToChoose(text = "c3"),
-                ChoiceUiState.AvailableToChoose(text = "c4")
+                ChoiceUiState.NotAvailableToChoose,
+                ChoiceUiState.AvailableToChoose,
+                ChoiceUiState.AvailableToChoose,
+                ChoiceUiState.AvailableToChoose
             )
         )
         assertEquals(excepted, actual)
 
         actual = viewModel.check()
         excepted = GameUiState.AnswerChecked(
-            question = "q1",
             choices = listOf<ChoiceUiState>(
-                ChoiceUiState.Correct(text = "c1"),
-                ChoiceUiState.NotAvailableToChoose(text = "c2"),
-                ChoiceUiState.NotAvailableToChoose(text = "c3"),
-                ChoiceUiState.NotAvailableToChoose(text = "c4")
+                ChoiceUiState.Correct,
+                ChoiceUiState.NotAvailableToChoose,
+                ChoiceUiState.NotAvailableToChoose,
+                ChoiceUiState.NotAvailableToChoose
             )
         )
         assertEquals(excepted, actual)
@@ -58,60 +57,55 @@ class GameViewModelTest {
 
         actual = viewModel.chooseFirst()
         excepted = GameUiState.ChoiceMade(
-            question = "q1",
             choices = listOf<ChoiceUiState>(
-                ChoiceUiState.NotAvailableToChoose(text = "c1"),
-                ChoiceUiState.AvailableToChoose(text = "c2"),
-                ChoiceUiState.AvailableToChoose(text = "c3"),
-                ChoiceUiState.AvailableToChoose(text = "c4")
+                ChoiceUiState.NotAvailableToChoose,
+                ChoiceUiState.AvailableToChoose,
+                ChoiceUiState.AvailableToChoose,
+                ChoiceUiState.AvailableToChoose
             )
         )
         assertEquals(excepted, actual)
 
         actual = viewModel.chooseSecond()
         excepted = GameUiState.ChoiceMade(
-            question = "q1",
             choices = listOf<ChoiceUiState>(
-                ChoiceUiState.AvailableToChoose(text = "c1"),
-                ChoiceUiState.NotAvailableToChoose(text = "c2"),
-                ChoiceUiState.AvailableToChoose(text = "c3"),
-                ChoiceUiState.AvailableToChoose(text = "c4")
+                ChoiceUiState.AvailableToChoose,
+                ChoiceUiState.NotAvailableToChoose,
+                ChoiceUiState.AvailableToChoose,
+                ChoiceUiState.AvailableToChoose
             )
         )
         assertEquals(excepted, actual)
 
         actual = viewModel.chooseThird()
         excepted = GameUiState.ChoiceMade(
-            question = "q1",
             choices = listOf<ChoiceUiState>(
-                ChoiceUiState.AvailableToChoose(text = "c1"),
-                ChoiceUiState.AvailableToChoose(text = "c2"),
-                ChoiceUiState.NotAvailableToChoose(text = "c3"),
-                ChoiceUiState.AvailableToChoose(text = "c4")
+                ChoiceUiState.AvailableToChoose,
+                ChoiceUiState.AvailableToChoose,
+                ChoiceUiState.NotAvailableToChoose,
+                ChoiceUiState.AvailableToChoose
             )
         )
         assertEquals(excepted, actual)
 
         actual = viewModel.chooseForth()
         excepted = GameUiState.ChoiceMade(
-            question = "q1",
             choices = listOf<ChoiceUiState>(
-                ChoiceUiState.AvailableToChoose(text = "c1"),
-                ChoiceUiState.AvailableToChoose(text = "c2"),
-                ChoiceUiState.AvailableToChoose(text = "c3"),
-                ChoiceUiState.NotAvailableToChoose(text = "c4")
+                ChoiceUiState.AvailableToChoose,
+                ChoiceUiState.AvailableToChoose,
+                ChoiceUiState.AvailableToChoose,
+                ChoiceUiState.NotAvailableToChoose
             )
         )
         assertEquals(excepted, actual)
 
         actual = viewModel.check()
         excepted = GameUiState.AnswerChecked(
-            question = "q1",
             choices = listOf<ChoiceUiState>(
-                ChoiceUiState.Correct(text = "c1"),
-                ChoiceUiState.NotAvailableToChoose(text = "c2"),
-                ChoiceUiState.NotAvailableToChoose(text = "c3"),
-                ChoiceUiState.Incorrect(text = "c4")
+                ChoiceUiState.Correct,
+                ChoiceUiState.NotAvailableToChoose,
+                ChoiceUiState.NotAvailableToChoose,
+                ChoiceUiState.Incorrect
             )
         )
         assertEquals(excepted, actual)

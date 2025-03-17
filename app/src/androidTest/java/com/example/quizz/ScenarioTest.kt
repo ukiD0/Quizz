@@ -68,9 +68,9 @@ class ScenarioTest {
         gamePage.assertSecondChoiceMakeState()
 
         gamePage.clickCheck()
-        gamePage.assertAnswerCheckStateFirstIsCorrectSecondIsCorrect()
+        gamePage.assertAnswerCheckStateFirstIsCorrectSecondIsIncorrect()
         activityScenarioRule.scenario.recreate()
-        gamePage.assertAnswerCheckStateFirstIsCorrectSecondIsCorrect()
+        gamePage.assertAnswerCheckStateFirstIsCorrectSecondIsIncorrect()
 
         gamePage.clickNext()
 

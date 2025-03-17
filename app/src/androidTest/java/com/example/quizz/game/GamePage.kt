@@ -108,7 +108,7 @@ class GamePage(
         nextUi.assertNotVisible()
     }
 
-    fun assertAnswerCheckStateFirstIsCorrectSecondIsCorrect() {
+    fun assertAnswerCheckStateFirstIsCorrectSecondIsIncorrect() {
         questionUi.assertTextVisible()
         choicesUiList.first().assertCorrectState()
         choicesUiList[1].assertIncorrectState()
