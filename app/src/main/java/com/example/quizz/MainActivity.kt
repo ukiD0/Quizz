@@ -56,4 +56,8 @@ class MainActivity : AppCompatActivity() {
         uiState = viewModel.init(savedInstanceState == null)
         update.invoke()
     }
+
+    override fun setRecentsScreenshotEnabled(enabled: Boolean) {
+        super.setRecentsScreenshotEnabled(enabled)
+    }
 }
