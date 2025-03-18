@@ -2,7 +2,10 @@ package com.example.quizz
 
 import com.example.quizz.views.choice.ChoiceUiState
 
-class GameViewModel(private val repository: GameRepository) {
+class GameViewModel(
+    private val repository: GameRepository,
+    private val handleDeath: HandleDeath = HandleDeath(),
+) {
 
     fun chooseFirst(): GameUiState {
         repository.saveUserChoice(0)
@@ -79,12 +82,20 @@ class GameViewModel(private val repository: GameRepository) {
 
     fun init(firstRun: Boolean = true): GameUiState {
         if (firstRun) {
+            handleDeath.deathHappened = false //very first run
             val data = repository.questionAndChoices()
             return GameUiState.AskedQuestion(
                 data.question,
                 data.choices
             )
         } else
+            if (handleDeath.deathHappened)
+                handleDeath.deathHappened = false //process death happened
+            else {
+                //just config change or activity death
+            }
             return GameUiState.Empty
     }
 }
+
+class HandleDeath(var deathHappened: Boolean = true)

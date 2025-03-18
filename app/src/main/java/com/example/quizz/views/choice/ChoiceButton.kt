@@ -63,3 +63,4 @@ interface UpdateChoiceButton : UpdateText {
         enabled: Boolean
     )
 }
+
