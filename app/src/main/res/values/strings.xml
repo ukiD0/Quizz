@@ -2,4 +2,5 @@
     <string name="app_name">Quizz</string>
     <string name="check">check</string>
     <string name="next">next</string>
+    <string name="new_game">New game\n</string>
 </resources>
