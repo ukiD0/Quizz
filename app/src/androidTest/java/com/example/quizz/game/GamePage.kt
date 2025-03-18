@@ -12,7 +12,6 @@ class GamePage(
     question: String,
     choices: List<String>
 ) {
-
     private val containerIdMatcher: Matcher<View> = withParent(withId(R.id.rootLayout))
     private val classTypeMatcher: Matcher<View> =
         withParent(isAssignableFrom(LinearLayout::class.java))
@@ -120,6 +119,10 @@ class GamePage(
 
     fun clickNext() {
         nextUi.click()
+    }
+
+    fun assertNotVisible() {
+        questionUi.assertDoesNotExist()
     }
 
 }
