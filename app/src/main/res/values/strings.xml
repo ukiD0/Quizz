@@ -3,4 +3,5 @@
     <string name="check">check</string>
     <string name="next">next</string>
     <string name="new_game">New game\n</string>
+    <string name="stats">Corrects: %d\nIncorrects: %d</string>
 </resources>
