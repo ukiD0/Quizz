@@ -25,7 +25,7 @@ class StatsUi(
                 containerIdMatcher,
                 containerClassTypeMatcher,
                 isAssignableFrom(TextView::class.java),
-                withText("Corrects: $corrects\nIncorrects: $incorrects"),
+                withText("Game Over\n\nCorrects: $corrects\nIncorrects: $incorrects"),
             )
         )
 
