@@ -1,63 +1,40 @@
 package com.example.quizz
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.example.quizz.databinding.ActivityMainBinding
+import com.example.quizz.game.GameScreen
+import com.example.quizz.game.NavigateToGame
+import com.example.quizz.stats.GameOverScreen
+import com.example.quizz.stats.NavigateToGameOver
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var uiState: GameUiState
+class MainActivity : AppCompatActivity(), Navigate {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
-        enableEdgeToEdge()
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
-        val viewModel: GameViewModel = (application as QuizApp).viewModel
-
-        val update: () -> Unit = {
-            uiState.update(
-                binding.questionTextView,
-                binding.firstChoiceButton,
-                binding.secondChoiceButton,
-                binding.thirdChoiceButton,
-                binding.forthChoiceButton,
-                binding.nextButton,
-                binding.checkButton
-            )
-        }
-
-        binding.firstChoiceButton.setOnClickListener {
-            uiState = viewModel.chooseFirst()
-            update.invoke()
-        }
-        binding.secondChoiceButton.setOnClickListener {
-            uiState = viewModel.chooseSecond()
-            update.invoke()
-        }
-        binding.thirdChoiceButton.setOnClickListener {
-            uiState = viewModel.chooseThird()
-            update.invoke()
-        }
-        binding.forthChoiceButton.setOnClickListener {
-            uiState = viewModel.chooseForth()
-            update.invoke()
-        }
-        binding.checkButton.setOnClickListener {
-            uiState = viewModel.check()
-            update.invoke()
-        }
-        binding.nextButton.setOnClickListener {
-            uiState = viewModel.next()
-            update.invoke()
-        }
-        uiState = viewModel.init(savedInstanceState == null)
-        update.invoke()
+        if (savedInstanceState == null)
+            navigateToGame()
     }
 
-    override fun setRecentsScreenshotEnabled(enabled: Boolean) {
-        super.setRecentsScreenshotEnabled(enabled)
+    override fun navigate(screen: Screen) {
+        screen.show(R.id.container, supportFragmentManager)
+    }
+
+}
+
+interface Navigate : NavigateToGame, NavigateToGameOver {
+
+    fun navigate(screen: Screen)
+
+    override fun navigateToGameOver() {
+        navigate(GameOverScreen)
+    }
+
+    override fun navigateToGame() {
+        navigate(GameScreen)
     }
 }
+
+
+

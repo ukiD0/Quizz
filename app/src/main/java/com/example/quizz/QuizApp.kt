@@ -6,6 +6,7 @@ import android.content.Context
 class QuizApp : Application() {
 
     lateinit var viewModel: GameViewModel
+    lateinit var gameOverViewModel: GameOverViewModel
 
     override fun onCreate() {
         super.onCreate()
@@ -16,5 +17,6 @@ class QuizApp : Application() {
                 IntCache.Base(sharedPreferences, "userChoiceIndexKey", -1),
             )
         )
+        gameOverViewModel = GameOverViewModel()
     }
 }
