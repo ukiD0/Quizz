@@ -1,7 +1,7 @@
-package com.example.quizz
+package com.example.quizz.game
 
 import com.example.quizz.views.choice.ChoiceUiState
-import org.junit.Assert.assertEquals
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
@@ -21,7 +21,7 @@ class GameViewModelTest {
             question = "q1",
             choices = listOf("c1", "c2", "c3", "c4")
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.chooseFirst()
         excepted = GameUiState.ChoiceMade(
@@ -32,7 +32,7 @@ class GameViewModelTest {
                 ChoiceUiState.AvailableToChoose
             )
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.check()
         excepted = GameUiState.AnswerChecked(
@@ -43,14 +43,14 @@ class GameViewModelTest {
                 ChoiceUiState.NotAvailableToChoose
             )
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.next()
         excepted = GameUiState.AskedQuestion(
             question = "q2",
             choices = listOf("cd1", "cd2", "cd3", "cd4")
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.chooseFirst()
         excepted = GameUiState.ChoiceMade(
@@ -61,7 +61,7 @@ class GameViewModelTest {
                 ChoiceUiState.AvailableToChoose
             )
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.check()
         excepted = GameUiState.AnswerChecked(
@@ -72,11 +72,11 @@ class GameViewModelTest {
                 ChoiceUiState.NotAvailableToChoose
             )
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.next()
         excepted = GameUiState.Finish
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
     }
 
     @Test
@@ -86,7 +86,7 @@ class GameViewModelTest {
             question = "q1",
             choices = listOf("c1", "c2", "c3", "c4")
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.chooseFirst()
         excepted = GameUiState.ChoiceMade(
@@ -97,7 +97,7 @@ class GameViewModelTest {
                 ChoiceUiState.AvailableToChoose
             )
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.chooseSecond()
         excepted = GameUiState.ChoiceMade(
@@ -108,7 +108,7 @@ class GameViewModelTest {
                 ChoiceUiState.AvailableToChoose
             )
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.chooseThird()
         excepted = GameUiState.ChoiceMade(
@@ -119,7 +119,7 @@ class GameViewModelTest {
                 ChoiceUiState.AvailableToChoose
             )
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.chooseForth()
         excepted = GameUiState.ChoiceMade(
@@ -130,7 +130,7 @@ class GameViewModelTest {
                 ChoiceUiState.NotAvailableToChoose
             )
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.check()
         excepted = GameUiState.AnswerChecked(
@@ -141,17 +141,16 @@ class GameViewModelTest {
                 ChoiceUiState.Incorrect
             )
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.next()
         excepted = GameUiState.AskedQuestion(
             question = "q2",
             choices = listOf("cd1", "cd2", "cd3", "cd4")
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
     }
 }
-
 private class FakeRepository : GameRepository {
 
     private val list: List<QuestionAndChoices> = listOf(

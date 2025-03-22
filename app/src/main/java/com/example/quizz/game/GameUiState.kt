@@ -1,4 +1,4 @@
-package com.example.quizz
+package com.example.quizz.game
 
 import com.example.quizz.stats.NavigateToGameOver
 import com.example.quizz.views.choice.ChoiceUiState
