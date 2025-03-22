@@ -5,7 +5,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
-class GameFragmentViewModelTest {
+class GameViewModelTest {
 
     private lateinit var viewModel: GameViewModel
 
@@ -43,6 +43,39 @@ class GameFragmentViewModelTest {
                 ChoiceUiState.NotAvailableToChoose
             )
         )
+        assertEquals(excepted, actual)
+
+        actual = viewModel.next()
+        excepted = GameUiState.AskedQuestion(
+            question = "q2",
+            choices = listOf("cd1", "cd2", "cd3", "cd4")
+        )
+        assertEquals(excepted, actual)
+
+        actual = viewModel.chooseFirst()
+        excepted = GameUiState.ChoiceMade(
+            choices = listOf<ChoiceUiState>(
+                ChoiceUiState.NotAvailableToChoose,
+                ChoiceUiState.AvailableToChoose,
+                ChoiceUiState.AvailableToChoose,
+                ChoiceUiState.AvailableToChoose
+            )
+        )
+        assertEquals(excepted, actual)
+
+        actual = viewModel.check()
+        excepted = GameUiState.AnswerChecked(
+            choices = listOf<ChoiceUiState>(
+                ChoiceUiState.Correct,
+                ChoiceUiState.NotAvailableToChoose,
+                ChoiceUiState.NotAvailableToChoose,
+                ChoiceUiState.NotAvailableToChoose
+            )
+        )
+        assertEquals(excepted, actual)
+
+        actual = viewModel.next()
+        excepted = GameUiState.Finish
         assertEquals(excepted, actual)
     }
 
@@ -156,8 +189,11 @@ private class FakeRepository : GameRepository {
     override fun next() {
         userChoiceIndex = -1
         index++
-        if (index == list.size)
+        if (isLastQuestion())
             index = 0
     }
 
+    override fun isLastQuestion(): Boolean {
+        return index == list.size
+    }
 }
