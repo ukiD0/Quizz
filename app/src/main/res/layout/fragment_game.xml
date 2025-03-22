@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".MainActivity">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.example.quizz.views.question.QuestionTextView
+        tools:text="Test"
+        android:textAlignment="center"
+        android:id="@+id/questionTextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        android:layout_height="wrap_content" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.example.quizz.views.choice.ChoiceButton
+        android:id="@+id/firstChoiceButton"
+        android:layout_marginHorizontal="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.example.quizz.views.choice.ChoiceButton
+        android:id="@+id/secondChoiceButton"
+        android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_height="wrap_content" />
+
+    <com.example.quizz.views.choice.ChoiceButton
+        android:id="@+id/thirdChoiceButton"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content" />
+
+    <com.example.quizz.views.choice.ChoiceButton
+        android:id="@+id/forthChoiceButton"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.example.quizz.views.visibleButton.VisibilityButton
+        android:id="@+id/checkButton"
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:text="@string/check" />
+
+    <com.example.quizz.views.visibleButton.VisibilityButton
+        android:id="@+id/nextButton"
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple"
+        android:text="@string/next" />
+
+</LinearLayout>

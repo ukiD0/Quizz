@@ -17,9 +17,7 @@ class MainActivity : AppCompatActivity(), Navigate {
             navigateToGame()
     }
 
-    override fun navigate(screen: Screen) {
-        screen.show(R.id.container, supportFragmentManager)
-    }
+    override fun navigate(screen: Screen) = screen.show(R.id.container, supportFragmentManager)
 
 }
 
@@ -27,14 +25,9 @@ interface Navigate : NavigateToGame, NavigateToGameOver {
 
     fun navigate(screen: Screen)
 
-    override fun navigateToGameOver() {
-        navigate(GameOverScreen)
-    }
+    override fun navigateToGameOver() = navigate(GameOverScreen)
 
-    override fun navigateToGame() {
-        navigate(GameScreen)
-    }
+    override fun navigateToGame() = navigate(GameScreen)
 }
-
 
 

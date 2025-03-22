@@ -2,6 +2,7 @@ package com.example.quizz
 
 import android.app.Application
 import android.content.Context
+import com.example.quizz.views.stats.StatsUiState
 
 class QuizApp : Application() {
 
@@ -18,5 +19,11 @@ class QuizApp : Application() {
             )
         )
         gameOverViewModel = GameOverViewModel()
+    }
+}
+
+class GameOverViewModel {
+    fun statusUiState(): StatsUiState {
+        return StatsUiState.Base(1, 1)
     }
 }
