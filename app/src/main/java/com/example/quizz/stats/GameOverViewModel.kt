@@ -2,8 +2,9 @@ package com.example.quizz.stats
 
 import com.example.quizz.views.stats.StatsUiState
 
-class GameOverViewModel {
+class GameOverViewModel(private val repository: StatsRepository) {
     fun statusUiState(): StatsUiState {
-        return StatsUiState.Base(1, 1)
+        val (corrects, incorrects) = repository.stats()
+        return StatsUiState.Base(corrects, incorrects)
     }
 }

@@ -16,7 +16,7 @@ class GameOverViewModelTest {
     }
 }
 
-private class FakeRepository : StatstRepository {
+private class FakeRepository : StatsRepository {
 
     override fun stats(): Pair<Int, Int> = Pair(2, 3)
 }
