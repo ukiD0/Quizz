@@ -1,4 +1,4 @@
-package com.example.quizz
+package com.example.quizz.game
 
 data class CorrectAndUserChoiceIndexes(
     val correctIndex: Int,

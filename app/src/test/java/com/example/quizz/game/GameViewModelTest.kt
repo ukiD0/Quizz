@@ -1,11 +1,11 @@
-package com.example.quizz
+package com.example.quizz.game
 
 import com.example.quizz.views.choice.ChoiceUiState
-import org.junit.Assert.assertEquals
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
-class GameFragmentViewModelTest {
+class GameViewModelTest {
 
     private lateinit var viewModel: GameViewModel
 
@@ -21,7 +21,7 @@ class GameFragmentViewModelTest {
             question = "q1",
             choices = listOf("c1", "c2", "c3", "c4")
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.chooseFirst()
         excepted = GameUiState.ChoiceMade(
@@ -32,7 +32,7 @@ class GameFragmentViewModelTest {
                 ChoiceUiState.AvailableToChoose
             )
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.check()
         excepted = GameUiState.AnswerChecked(
@@ -43,17 +43,14 @@ class GameFragmentViewModelTest {
                 ChoiceUiState.NotAvailableToChoose
             )
         )
-        assertEquals(excepted, actual)
-    }
+        Assert.assertEquals(excepted, actual)
 
-    @Test
-    fun caseNumber2() {
-        var actual: GameUiState = viewModel.init()
-        var excepted: GameUiState = GameUiState.AskedQuestion(
-            question = "q1",
-            choices = listOf("c1", "c2", "c3", "c4")
+        actual = viewModel.next()
+        excepted = GameUiState.AskedQuestion(
+            question = "q2",
+            choices = listOf("cd1", "cd2", "cd3", "cd4")
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.chooseFirst()
         excepted = GameUiState.ChoiceMade(
@@ -64,7 +61,43 @@ class GameFragmentViewModelTest {
                 ChoiceUiState.AvailableToChoose
             )
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
+
+        actual = viewModel.check()
+        excepted = GameUiState.AnswerChecked(
+            choices = listOf<ChoiceUiState>(
+                ChoiceUiState.Correct,
+                ChoiceUiState.NotAvailableToChoose,
+                ChoiceUiState.NotAvailableToChoose,
+                ChoiceUiState.NotAvailableToChoose
+            )
+        )
+        Assert.assertEquals(excepted, actual)
+
+        actual = viewModel.next()
+        excepted = GameUiState.Finish
+        Assert.assertEquals(excepted, actual)
+    }
+
+    @Test
+    fun caseNumber2() {
+        var actual: GameUiState = viewModel.init()
+        var excepted: GameUiState = GameUiState.AskedQuestion(
+            question = "q1",
+            choices = listOf("c1", "c2", "c3", "c4")
+        )
+        Assert.assertEquals(excepted, actual)
+
+        actual = viewModel.chooseFirst()
+        excepted = GameUiState.ChoiceMade(
+            choices = listOf<ChoiceUiState>(
+                ChoiceUiState.NotAvailableToChoose,
+                ChoiceUiState.AvailableToChoose,
+                ChoiceUiState.AvailableToChoose,
+                ChoiceUiState.AvailableToChoose
+            )
+        )
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.chooseSecond()
         excepted = GameUiState.ChoiceMade(
@@ -75,7 +108,7 @@ class GameFragmentViewModelTest {
                 ChoiceUiState.AvailableToChoose
             )
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.chooseThird()
         excepted = GameUiState.ChoiceMade(
@@ -86,7 +119,7 @@ class GameFragmentViewModelTest {
                 ChoiceUiState.AvailableToChoose
             )
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.chooseForth()
         excepted = GameUiState.ChoiceMade(
@@ -97,7 +130,7 @@ class GameFragmentViewModelTest {
                 ChoiceUiState.NotAvailableToChoose
             )
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.check()
         excepted = GameUiState.AnswerChecked(
@@ -108,17 +141,16 @@ class GameFragmentViewModelTest {
                 ChoiceUiState.Incorrect
             )
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
 
         actual = viewModel.next()
         excepted = GameUiState.AskedQuestion(
             question = "q2",
             choices = listOf("cd1", "cd2", "cd3", "cd4")
         )
-        assertEquals(excepted, actual)
+        Assert.assertEquals(excepted, actual)
     }
 }
-
 private class FakeRepository : GameRepository {
 
     private val list: List<QuestionAndChoices> = listOf(
@@ -156,8 +188,9 @@ private class FakeRepository : GameRepository {
     override fun next() {
         userChoiceIndex = -1
         index++
-        if (index == list.size)
-            index = 0
     }
 
+    override fun isLastQuestion(): Boolean {
+        return index == list.size
+    }
 }
