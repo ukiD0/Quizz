@@ -133,11 +133,7 @@ class ScenarioTest {
         gameOverPage.clickNewGame()
         gameOverPage.assertNotVisible()
 
-        gamePage = GamePage(
-            question = "What color is the blood?", choices = listOf(
-                "red", "blue", "red", "yellow"
-            )
-        )
+        setup()
         gamePage.assertAskedQuestionState()
         activityScenarioRule.scenario.recreate()
         gamePage.assertAskedQuestionState()
@@ -155,8 +151,8 @@ class ScenarioTest {
         gamePage.clickNext()
 
         gamePage = GamePage(
-            question = "What color is the sun?", choices = listOf(
-                "yellow", "blue", "red", "green"
+            question = "What color is the grass?", choices = listOf(
+                "green", "blue", "red", "yellow"
             )
         )
         gamePage.assertAskedQuestionState()
@@ -176,7 +172,7 @@ class ScenarioTest {
         gamePage.clickNext()
         gamePage.assertNotVisible()
 
-        gameOverPage = GameOverPage(incorrects = 2, corrects = 0)
+        gameOverPage = GameOverPage(incorrects = 1, corrects = 1)
         gameOverPage.assertInitialState()
         activityScenarioRule.scenario.recreate()
         gameOverPage.assertInitialState()
@@ -184,8 +180,26 @@ class ScenarioTest {
         gameOverPage.clickNewGame()
         gameOverPage.assertNotVisible()
 
+        setup()
+
+        gamePage.assertAskedQuestionState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertAskedQuestionState()
+
+        gamePage.clickFirstChoice()
+        gamePage.assertFirstChoiceMakeState()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertFirstChoiceMakeState()
+
+        gamePage.clickCheck()
+        gamePage.assertAnswerCheckStateFirstIsCorrect()
+        activityScenarioRule.scenario.recreate()
+        gamePage.assertAnswerCheckStateFirstIsCorrect()
+
+        gamePage.clickNext()
+
         gamePage = GamePage(
-            question = "What color is the crocodile?", choices = listOf(
+            question = "What color is the grass?", choices = listOf(
                 "green", "blue", "red", "yellow"
             )
         )
@@ -204,28 +218,7 @@ class ScenarioTest {
         gamePage.assertAnswerCheckStateFirstIsCorrect()
 
         gamePage.clickNext()
-
-        gamePage = GamePage(
-            question = "What color is the christmas tree?", choices = listOf(
-                "green", "blue", "red", "yellow"
-            )
-        )
-        gamePage.assertAskedQuestionState()
-        activityScenarioRule.scenario.recreate()
-        gamePage.assertAskedQuestionState()
-
-        gamePage.clickFirstChoice()
-        gamePage.assertFirstChoiceMakeState()
-        activityScenarioRule.scenario.recreate()
-        gamePage.assertFirstChoiceMakeState()
-
-        gamePage.clickCheck()
-        gamePage.assertAnswerCheckStateFirstIsCorrect()
-        activityScenarioRule.scenario.recreate()
-        gamePage.assertAnswerCheckStateFirstIsCorrect()
-
-        gamePage.clickNext()
-        gameOverPage = GameOverPage(incorrects = 0, corrects = 0)
+        gameOverPage = GameOverPage(incorrects = 0, corrects = 2)
         gameOverPage.assertInitialState()
         activityScenarioRule.scenario.recreate()
         gameOverPage.assertInitialState()

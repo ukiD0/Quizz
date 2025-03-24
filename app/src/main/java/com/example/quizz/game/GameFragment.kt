@@ -26,7 +26,7 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewModel: GameViewModel = (requireActivity().application as QuizApp).viewModel
+        val viewModel: GameViewModel = (requireActivity().application as QuizApp).gameViewModel
         lateinit var uiState: GameUiState
         val update: () -> Unit = {
             uiState.update(
