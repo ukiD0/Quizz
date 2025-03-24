@@ -1,6 +1,7 @@
 package com.example.quizz.game
 
 import com.example.quizz.views.choice.ChoiceUiState
+import junit.framework.TestCase.assertEquals
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -8,10 +9,12 @@ import org.junit.Test
 class GameViewModelTest {
 
     private lateinit var viewModel: GameViewModel
+    private lateinit var repository: FakeRepository
 
     @Before
     fun setup() {
-        viewModel = GameViewModel(repository = FakeRepository())
+        repository = FakeRepository()
+        viewModel = GameViewModel(repository = repository)
     }
 
     @Test
@@ -51,6 +54,7 @@ class GameViewModelTest {
             choices = listOf("cd1", "cd2", "cd3", "cd4")
         )
         Assert.assertEquals(excepted, actual)
+        assertEquals(false, repository.clearCalled)
 
         actual = viewModel.chooseFirst()
         excepted = GameUiState.ChoiceMade(
@@ -77,6 +81,7 @@ class GameViewModelTest {
         actual = viewModel.next()
         excepted = GameUiState.Finish
         Assert.assertEquals(excepted, actual)
+        assertEquals(true, repository.clearCalled)
     }
 
     @Test
@@ -192,5 +197,11 @@ private class FakeRepository : GameRepository {
 
     override fun isLastQuestion(): Boolean {
         return index == list.size
+    }
+
+    var clearCalled = false
+
+    override fun clear() {
+        clearCalled = true
     }
 }

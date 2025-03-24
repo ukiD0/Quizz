@@ -5,22 +5,32 @@ import android.content.Context
 import com.example.quizz.game.GameRepository
 import com.example.quizz.game.GameViewModel
 import com.example.quizz.stats.GameOverViewModel
+import com.example.quizz.stats.StatsRepository
 
 class QuizApp : Application() {
-
-    lateinit var viewModel: GameViewModel
+    //todo di improve
+    lateinit var gameViewModel: GameViewModel
     lateinit var gameOverViewModel: GameOverViewModel
 
     override fun onCreate() {
         super.onCreate()
         val sharedPreferences = getSharedPreferences("quizAppData", Context.MODE_PRIVATE)
-        viewModel = GameViewModel(
+        val corrects = IntCache.Base(sharedPreferences, "corrects", 0)
+        val incorrects = IntCache.Base(sharedPreferences, "incorrects", 0)
+        gameViewModel = GameViewModel(
             GameRepository.Base(
+                corrects,
+                incorrects,
                 IntCache.Base(sharedPreferences, "indexKey", 0),
                 IntCache.Base(sharedPreferences, "userChoiceIndexKey", -1),
             )
         )
-        // gameOverViewModel = GameOverViewModel()
+        gameOverViewModel = GameOverViewModel(
+            StatsRepository.Base(
+                corrects,
+                incorrects
+            )
+        )
     }
 }
 
