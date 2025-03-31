@@ -2,12 +2,13 @@ package com.example.quizz
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.quizz.di.ProvideViewModel
 import com.example.quizz.game.GameScreen
 import com.example.quizz.game.NavigateToGame
 import com.example.quizz.stats.GameOverScreen
 import com.example.quizz.stats.NavigateToGameOver
 
-class MainActivity : AppCompatActivity(), Navigate {
+class MainActivity : AppCompatActivity(), Navigate, ProvideViewModel {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +19,9 @@ class MainActivity : AppCompatActivity(), Navigate {
     }
 
     override fun navigate(screen: Screen) = screen.show(R.id.container, supportFragmentManager)
+
+    override fun <T : MyViewModel> makeViewModel(clazz: Class<T>): T =
+        (application as ProvideViewModel).makeViewModel(clazz)
 
 }
 
