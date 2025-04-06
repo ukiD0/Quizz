@@ -3,6 +3,8 @@ package com.example.quizz
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.quizz.game.GamePage
+import com.example.quizz.load.LoadPage
+import com.example.quizz.stats.GameOverPage
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -32,9 +34,7 @@ class ScenarioTest {
      */
     @Test
     fun caseNumber1() {
-        gamePage.assertAskedQuestionState()
-        activityScenarioRule.scenario.recreate()
-        gamePage.assertAskedQuestionState()
+        caseNumber4()
 
         gamePage.clickFirstChoice()
         gamePage.assertFirstChoiceMakeState()
@@ -53,10 +53,7 @@ class ScenarioTest {
      */
     @Test
     fun caseNumber2() {
-        gamePage.assertAskedQuestionState()
-        activityScenarioRule.scenario.recreate()
-        gamePage.assertAskedQuestionState()
-
+        caseNumber4()
 
         gamePage.clickFirstChoice()
         gamePage.assertFirstChoiceMakeState()
@@ -87,9 +84,7 @@ class ScenarioTest {
 
     @Test
     fun caseNumber3() {
-        gamePage.assertAskedQuestionState()
-        activityScenarioRule.scenario.recreate()
-        gamePage.assertAskedQuestionState()
+        caseNumber4()
 
         gamePage.clickSecondChoice()
         gamePage.assertSecondChoiceMakeState()
@@ -134,6 +129,8 @@ class ScenarioTest {
         gameOverPage.assertNotVisible()
 
         setup()
+        caseNumber4()
+
         gamePage.assertAskedQuestionState()
         activityScenarioRule.scenario.recreate()
         gamePage.assertAskedQuestionState()
@@ -181,6 +178,7 @@ class ScenarioTest {
         gameOverPage.assertNotVisible()
 
         setup()
+        caseNumber4()
 
         gamePage.assertAskedQuestionState()
         activityScenarioRule.scenario.recreate()
@@ -229,17 +227,21 @@ class ScenarioTest {
     fun caseNumber4() {
         val loadPage = LoadPage()
 
-        loadPage.assertErrorState()
+        loadPage.assertProgressState()
         activityScenarioRule.scenario.recreate()
-        loadPage.assertErrorState()
+        loadPage.assertProgressState()
 
         loadPage.waitTillError()
 
+        loadPage.assertErrorState()
+        activityScenarioRule.scenario.recreate()
+        loadPage.assertErrorState()
+
+        loadPage.clickRetry()
+
         loadPage.assertProgressState()
         activityScenarioRule.scenario.recreate()
         loadPage.assertProgressState()
-
-        loadPage.clickRetry()
 
         loadPage.waitTillGone()
 

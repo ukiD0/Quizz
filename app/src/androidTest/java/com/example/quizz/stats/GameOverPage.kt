@@ -1,10 +1,11 @@
-package com.example.quizz
+package com.example.quizz.stats
 
 import android.view.View
 import android.widget.FrameLayout
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withParent
+import com.example.quizz.R
 import com.example.quizz.game.ButtonUi
 import org.hamcrest.Matcher
 
