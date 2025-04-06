@@ -233,11 +233,13 @@ class ScenarioTest {
         activityScenarioRule.scenario.recreate()
         loadPage.assertErrorState()
 
-        loadPage.clickRetry()
+        loadPage.waitTillError()
 
         loadPage.assertProgressState()
         activityScenarioRule.scenario.recreate()
         loadPage.assertProgressState()
+
+        loadPage.clickRetry()
 
         loadPage.waitTillGone()
 
