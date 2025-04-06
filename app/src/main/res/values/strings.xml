@@ -2,6 +2,8 @@
     <string name="app_name">Quizz</string>
     <string name="check">check</string>
     <string name="next">next</string>
-    <string name="new_game">New game\n</string>
+    <string name="new_game">New game</string>
     <string name="stats">Game Over\n\nCorrects: %d\nIncorrects: %d</string>
+    <string name="no_internet_connection">No internet connection!</string>
+    <string name="retry">Retry</string>
 </resources>

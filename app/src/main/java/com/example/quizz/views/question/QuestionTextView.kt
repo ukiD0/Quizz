@@ -23,4 +23,5 @@ class QuestionTextView : androidx.appcompat.widget.AppCompatTextView, UpdateText
 interface UpdateText {
 
     fun update(text: String)
+
 }
