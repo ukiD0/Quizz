@@ -1,5 +1,7 @@
 package com.example.quizz.game
 
+import com.example.quizz.ClearViewModel
+import com.example.quizz.MyViewModel
 import com.example.quizz.views.choice.ChoiceUiState
 import junit.framework.TestCase.assertEquals
 import org.junit.Assert
@@ -14,7 +16,7 @@ class GameViewModelTest {
     @Before
     fun setup() {
         repository = FakeRepository()
-        viewModel = GameViewModel(repository = repository)
+        viewModel = GameViewModel(FakeClearViewModel(), repository = repository)
     }
 
     @Test
@@ -156,6 +158,7 @@ class GameViewModelTest {
         Assert.assertEquals(excepted, actual)
     }
 }
+
 private class FakeRepository : GameRepository {
 
     private val list: List<QuestionAndChoices> = listOf(
@@ -204,4 +207,11 @@ private class FakeRepository : GameRepository {
     override fun clear() {
         clearCalled = true
     }
+}
+
+class FakeClearViewModel : ClearViewModel {
+    override fun clear(viewModelClass: Class<out MyViewModel>) {
+
+    }
+
 }
