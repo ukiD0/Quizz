@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.quizz.databinding.FragmentLoadBinding
 import com.example.quizz.di.ProvideViewModel
+import com.example.quizz.game.NavigateToGame
 
 class LoadFragment : Fragment() {
 
@@ -29,6 +30,7 @@ class LoadFragment : Fragment() {
             binding.retruButton,
             binding.progressBar
         )
+        uiState.navigate((requireActivity() as NavigateToGame))
     }
 
     private lateinit var viewModel: LoadViewModel
@@ -41,7 +43,7 @@ class LoadFragment : Fragment() {
             viewModel.load()
         }
 
-        viewModel.load(firstRun = savedInstanceState == null)
+        viewModel.load(isFirstRun = savedInstanceState == null)
 
     }
 
