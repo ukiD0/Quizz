@@ -1,6 +1,8 @@
-package com.example.quizz.load
+package com.example.quizz.load.presentation
 
 import com.example.quizz.MyViewModel
+import com.example.quizz.load.data.LoadRepository
+import com.example.quizz.load.data.LoadResult
 
 class LoadViewModel(
     private val repository: LoadRepository,

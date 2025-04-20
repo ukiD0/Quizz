@@ -34,7 +34,7 @@ class ErrorView : androidx.appcompat.widget.AppCompatTextView, UpdateError {
     }
 
     override fun update(uiState: ErrorUiState) {
-        state = state
+        state = uiState
         state.update(this)
     }
 

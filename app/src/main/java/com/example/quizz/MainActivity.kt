@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.quizz.di.ProvideViewModel
 import com.example.quizz.game.GameScreen
 import com.example.quizz.game.NavigateToGame
+import com.example.quizz.load.presentation.LoadScreen
+import com.example.quizz.load.presentation.NavigateToLoad
 import com.example.quizz.stats.GameOverScreen
 import com.example.quizz.stats.NavigateToGameOver
 
@@ -14,8 +16,8 @@ class MainActivity : AppCompatActivity(), Navigate, ProvideViewModel {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (savedInstanceState == null)
-            navigateToGame()
+        if (savedInstanceState == null)//todo mainViewModel later
+            navigateToLoad()
     }
 
     override fun navigate(screen: Screen) = screen.show(R.id.container, supportFragmentManager)
@@ -25,13 +27,15 @@ class MainActivity : AppCompatActivity(), Navigate, ProvideViewModel {
 
 }
 
-interface Navigate : NavigateToGame, NavigateToGameOver {
+interface Navigate : NavigateToGame, NavigateToGameOver, NavigateToLoad {
 
     fun navigate(screen: Screen)
 
     override fun navigateToGameOver() = navigate(GameOverScreen)
 
     override fun navigateToGame() = navigate(GameScreen)
+
+    override fun navigateToLoad() = navigate(LoadScreen)
 }
 
 

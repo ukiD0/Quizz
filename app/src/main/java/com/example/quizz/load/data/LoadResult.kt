@@ -1,4 +1,4 @@
-package com.example.quizz.load
+package com.example.quizz.load.data
 
 interface LoadResult {
     fun isSuccessful(): Boolean
