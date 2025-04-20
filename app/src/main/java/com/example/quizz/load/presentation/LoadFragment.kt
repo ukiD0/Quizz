@@ -1,4 +1,4 @@
-package com.example.quizz.load
+package com.example.quizz.load.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater

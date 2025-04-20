@@ -1,8 +1,8 @@
 package com.example.quizz.game
 
 import com.example.quizz.IntCache
-import com.example.quizz.load.ParseQuestionAndChoices
-import com.example.quizz.load.StringCache
+import com.example.quizz.load.data.ParseQuestionAndChoices
+import com.example.quizz.load.data.StringCache
 
 interface GameRepository {
 
@@ -34,31 +34,26 @@ interface GameRepository {
 
         constructor(
             corrects: IntCache,
-            incorrect: IntCache,
+            incorrects: IntCache,
             index: IntCache,
             userChoiceIndex: IntCache,
             dataCache: StringCache,
             parseQuestionAndChoices: ParseQuestionAndChoices
         ) : this(
             corrects,
-            incorrect,
+            incorrects,
             index,
             userChoiceIndex,
             parseQuestionAndChoices.parse(dataCache.read()).results.map {
                 val list = mutableListOf<String>()
                 list.add(it.correct_answer)
-                list.add(it.incorrect_answers)
+                list.addAll(it.incorrect_answers)
                 val finalList = list.shuffled()
                 val indexOfCorrect = finalList.indexOf(it.correct_answer)
                 QuestionAndChoices(
                     it.question,
                     finalList,
                     indexOfCorrect
-                )
-                QuestionAndChoices(
-                    it.question,
-                    listOf(it.correct_answer) + it.incorrect_answers,
-                    0
                 )
             }
         )

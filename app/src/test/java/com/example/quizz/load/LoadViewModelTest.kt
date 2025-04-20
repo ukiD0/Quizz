@@ -1,6 +1,11 @@
 package com.example.quizz.load
 
 
+import com.example.quizz.load.data.LoadRepository
+import com.example.quizz.load.data.LoadResult
+import com.example.quizz.load.presentation.LoadUiState
+import com.example.quizz.load.presentation.LoadViewModel
+import com.example.quizz.load.presentation.UiObservable
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 

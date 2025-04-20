@@ -1,4 +1,4 @@
-package com.example.quizz.load
+package com.example.quizz.load.data
 
 import com.google.gson.Gson
 import java.net.HttpURLConnection
@@ -59,6 +59,7 @@ interface ParseQuestionAndChoices {
     class Base(
         private val gson: Gson
     ) : ParseQuestionAndChoices {
+
         override fun parse(source: String): Response {
             return gson.fromJson(source, Response::class.java)
         }
@@ -74,5 +75,5 @@ data class Response(
 data class QuestionAnfChoicesCloud(
     val question: String,
     val correct_answer: String,
-    val incorrect_answers: String
+    val incorrect_answers: List<String>
 )
